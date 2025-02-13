@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Registration Form</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(to right, #74ebd5, #acb6e5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        padding: 20px;
+        box-sizing: border-box;
+        overflow-y: auto;
+    }
+    
+    .container {
+        width: 40%;
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        text-align: center;
+    }
+    
+    h1 {
+        color: #333;
+    }
+    
+    input, select {
+        width: 90%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    
+    .gender, .languages {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin: 10px 0;
+    }
+    
+    button {
+        background: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    
+    button:hover {
+        background: #45a049;
+    }
+</style>
+</head>
+<body>
+    <div class="container">
+        <h1>Registration Form</h1>
+        <form>
+            <input type="text" name="firstname" placeholder="First Name" required><br>
+            <input type="text" name="lastname" placeholder="Last Name" required><br>
+            <div class="gender">
+                <label><input type="radio" name="gender"> Male</label>
+                <label><input type="radio" name="gender"> Female</label>
+            </div>
+            <select name="dropdown">
+                <option value="Artificial Intelligence">Artificial Intelligence</option>
+                <option value="Machine Learning">Machine Learning</option>
+            </select><br>
+            <div class="languages">
+                <label><input type="checkbox"> Java</label>
+                <label><input type="checkbox"> C++</label>
+                <label><input type="checkbox"> HTML, CSS, JavaScript</label>
+            </div>
+            <input type="text" name="address" placeholder="Address"><br>
+            <input type="text" name="pincode" placeholder="Pincode"><br>
+            <input type="text" name="state" placeholder="State"><br>
+            <input type="text" name="country" placeholder="Country"><br>
+            <input type="text" name="number" placeholder="Phone No."><br>
+            <input type="email" name="email" placeholder="Email Address"><br>
+            <input type="date" name="dob"><br>
+            
+            <button type="submit">Submit</button>
+            <button type="reset">Reset</button>
+        </form>
+    </div>
+</body>
+</html>
