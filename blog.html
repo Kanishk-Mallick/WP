@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Website - Blog Page</title>
+    <style>
+        body {
+            background-image: url('https://wallpaperaccess.com/full/983300.jpg');
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        nav {
+            background-color: #00144d;
+            color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+
+        nav ul li a:hover {
+            color: #ffcc00;
+        }
+
+        .blog {
+            background-image: url('https://wallpaperaccess.com/full/983300.jpg');
+            background-color: #cfcdcd;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .blog h2 {
+            color: #ffcc00;
+            font-family: 'Georgia', serif;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+        }
+
+        .post {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background: #a6a6a6;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            margin: 20px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px) scale(1.1);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .image {
+            overflow: hidden;
+        }
+
+        .image img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover .image img {
+            transform: scale(1.1);
+        }
+
+        .card h3 {
+            font-family: 'Courier New', monospace;
+            font-size: 1.5rem;
+            margin: 15px 0;
+        }
+
+        .card p {
+            font-family: 'Times New Roman', serif;
+            color: #555;
+            padding: 0 15px;
+        }
+
+        .read-more {
+            display: inline-block;
+            margin: 15px 0;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .read-more:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">My Blog</div>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="blog">
+        <h2>Latest Posts</h2>
+        <div class="post">
+            <div class="card">
+                <h3>Blog Post Title 1</h3>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Provident consequatur temporibus assumenda quibusdam itaque a reprehenderit sint, optio aperiam accusantium labore voluptates odio aut molestias reiciendis, voluptatem minus, quae ut.</p>
+                <a href="#" class="read-more">Read More</a>
+            </div>
+
+            <div class="card">
+                <h3>Blog Post Title 2</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi quas eos temporibus? Blanditiis expedita nobis maiores nisi, quos accusantium cupiditate, dolor repellat repudiandae neque consequuntur reprehenderit illo quam amet tempore.</p>
+                <a href="#" class="read-more">Read More</a>
+            </div>
+
+            <div class="card">
+                <h3>Blog Post Title 3</h3>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eum sed itaque fugiat velit ratione iusto iste placeat, sit consequatur eius harum eligendi ut totam recusandae, dolorum veniam est distinctio laudantium?.</p>
+                <a href="#" class="read-more">Read More</a>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
