@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculator</title>
+<style>
+:root{
+  --blue: #1a75ff;
+  --orange: #ff6600;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.calc {
+  background-color: #000;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+  width: 300px;
+  padding: 20px;
+}
+
+.display {
+  width: 100%;
+  height: 50px;
+  font-size: 2rem;
+  text-align: right;
+  padding: 5px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  background-color: #333;
+  color: white;
+  border: none;
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.button {
+  background-color: #f0f0f0;
+  border: none;
+  padding: 20px;
+  font-size: 1.5rem;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.button:hover {
+  background-color: #d0d0d0;
+}
+
+.button:active {
+  background-color: #b0b0b0;
+}
+
+#operation {
+  background-color: var(--orange);
+  color: white;
+}
+
+#operation:hover {
+  background-color: #e65c00;
+}
+
+#operation:active {
+  background-color: #cc5200;
+}
+
+#result {
+  grid-column: span 2;
+  background-color: var(--blue);
+  color: white;
+}
+
+#result:hover {
+  background-color: #0066ff;
+}
+
+#result:active {
+  background-color: #005ce6;
+}
+</style>
+</head>
+<body>
+
+<main>
+  <div class="calc">
+    <input type="text" class="display" id="display" readonly>
+    <div class="buttons">
+      <button class="button" id="operation" onclick="clearDisplay()">C</button>
+      <button class="button" id="operation" onclick="operand('(')">(</button>
+      <button class="button" id="operation" onclick="operand(')')">)</button>
+      <button class="button" id="operation" onclick="operand('+')">+</button>
+      <button class="button" onclick="operand('7')">7</button>
+      <button class="button" onclick="operand('8')">8</button>
+      <button class="button" onclick="operand('9')">9</button>
+      <button class="button" id="operation" onclick="operand('-')">-</button>
+      <button class="button" onclick="operand('4')">4</button>
+      <button class="button" onclick="operand('5')">5</button>
+      <button class="button" onclick="operand('6')">6</button>
+      <button class="button" id="operation" onclick="operand('*')">*</button>
+      <button class="button" onclick="operand('1')">1</button>
+      <button class="button" onclick="operand('2')">2</button>
+      <button class="button" onclick="operand('3')">3</button>
+      <button class="button" id="operation" onclick="operand('/')">/</button>
+      <button class="button" onclick="operand('0')">0</button>
+      <button class="button" id="operation" onclick="operand('.')">.</button>
+      <button class="button" id="result" onclick="answer()">=</button>
+    </div>
+  </div>
+</main>
+
+<script>
+const display = document.getElementById('display');
+
+function operand(value) {
+  display.value += value;
+}
+
+function clearDisplay() {
+  display.value = '';
+}
+
+function answer() {
+  try {
+    display.value = eval(display.value);
+  } catch {
+    display.value = 'Error';
+  }
+}
+</script>
+
+</body>
+</html>
