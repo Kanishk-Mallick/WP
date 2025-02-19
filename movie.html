@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie List</title>
+
+<style>
+body {
+    background-image: url('https://t4.ftcdn.net/jpg/04/61/47/03/360_F_461470323_6TMQSkCCs9XQoTtyer8VCsFypxwRiDGU.jpg');
+    background-size: cover;
+}
+
+h1 {
+    text-align: center;
+    color: aqua;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.box {
+    background-color: #000;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+    width: 300px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    text-align: center; 
+}
+
+input {
+    padding: 10px;
+    width: 80%;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+}
+
+button {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: aqua;
+    color: rgb(0, 0, 0);
+}
+
+button:hover {
+    background-color: rgb(1, 189, 189);
+}
+
+ul {
+    color: white;
+    list-style-type: none;
+    font-size: 18px;
+    padding-left: 0; 
+}
+p{
+    color: aliceblue;
+}
+
+</style>
+</head>
+<body>
+    
+    <main>
+        
+    <div class="box">
+    <h1>Movie List</h1>
+
+    <input type="text" id="movie" placeholder="Enter movie name">
+    
+
+    <button onclick="addmovie()">Add Movie</button>
+
+    
+
+    <ul id="movielist"></ul>
+
+    <button onclick="clear()">Clear</button>
+
+    <p id="count">Total Movies : 0</p>
+
+    </div>
+    </main>
+    
+    <script>
+        let movie=[];
+
+        function addmovie() {
+            let name = document.getElementById("movie").value;
+            
+            if (name === "") {
+                alert("Please enter a movie name.");
+                return;
+            }
+
+            movie.push(name);
+
+           document.getElementById("movie").value = "";
+
+           list();
+           count();
+        }
+
+        function list() {
+            let movielist = document.getElementById("movielist");
+
+            movielist.innerHTML="";
+            movie.forEach(print);
+
+            function print(name){
+            let li = document.createElement('li');
+            li.textContent = name;
+            movielist.appendChild(li);
+        }
+
+        }
+
+    
+        function clear(){
+            movie=[];
+
+            list();
+            count();
+        }
+
+        function count(){
+            document.getElementById("count").textContent="Total Movies : " +movie.length;
+        }
+
+        
+    </script>
+</body>
+</html>
