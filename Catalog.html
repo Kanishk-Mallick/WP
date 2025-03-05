@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Catalog</title>
+  <style>
+    * {
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      text-align: center;
+    }
+
+    body {
+      background-color: #046ec4;
+      padding: 20px;
+    }
+
+    header {
+      margin-bottom: 50px;
+    }
+
+    h1 {
+      font-size: 36px;
+      color: #ffffff;
+    }
+
+    .product-list {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .product {
+      background-color: rgb(255, 255, 255);
+      padding: 10px;
+      border: 1px solid #ddd;
+      width: 200px;
+      text-align: center;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .product img {
+      max-width: 100%;
+      height: 100px;
+    }
+
+    .product-name {
+      font-size: 18px;
+      margin: 10px 0;
+    }
+
+    .product-price {
+      font-size: 16px;
+      color: #2d2d2d;
+      margin-bottom: 10px;
+    }
+
+    button {
+      background-color: #346fdd;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    button:hover {
+      background-color: #1238b4;
+    }
+
+    .cart {
+      margin-top: 50px;
+      background-color: #5c9dff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      display: inline-block;
+    }
+
+    #cart-items {
+      list-style: none;
+      padding: 0;
+    }
+
+    .cart-item {
+      margin-bottom: 10px;
+    }
+
+    #cart-total {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Shopping Website</h1>
+  </header>
+
+  <main>
+    <section id="product-list" class="product-list">
+
+    </section>
+
+    <section id="cart" class="cart">
+      <h2>Cart</h2><br>
+      <ul id="cart-items">
+
+      </ul>
+      <button onclick="clearCart()">Clear Cart</button>
+    </section>
+  </main>
+
+  <script>
+
+    class Product {
+      constructor(name, price, image,id) {
+
+        this.name = name;
+        this.price = price;
+        this.image = image;
+        this.id = id;
+      }
+    }
+
+
+    class Cart {
+      constructor() {
+        this.items = [];
+      }
+
+      addItem(product) {
+        this.items.push(product);
+        this.update();
+      }
+
+      update() {
+        const list = document.getElementById('cart-items');
+        list.innerHTML = '';
+
+        this.items.forEach(item => {
+          const li = document.createElement('li');
+          li.classList.add('cart-item');
+          li.innerText = `${item.name} - ₹${item.price}`;
+          list.appendChild(li);
+        });
+
+      }
+    }
+
+
+    const Products = [
+      new Product('Apple MacBook Air M1', 63990, 'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSLl0MWutnqkN657j913PAvWPH7sO4KB0ia1GvOHe7VH5NGfV5HSvBuBEjLAJquYy7G5mdqGrbrd1sGZdNhNoUEGBDn33tLjOTEj85-FsI0hb7yNEOeATSNIsU',1),
+      new Product('Lymio Casual Shirt for Men', 599, 'https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcS7ZVBcatobaWCreopCK2yN3vPK9M_z-mUH9QTB0WDsOZJQVCWzrEHIURIzJYvmcw4QnjOtNRAY7WV1TuSbuCN_wsJQVTSIAsb2fruJ3SMh8ln6dtuhyKbH',2),
+      new Product('OnePlus Nord CE4 5G', 21998, 'https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcRbwrmnjWdySON1FXjyqgbvPOtWyXUJL0-o6XNJFbRRcYw2q2-DCK6smYe_8bONnbGZNDpHs0h0rVIfgbzIJ4wX-CrKTOmZWT-5D-7MhBGktAs5witfogZ2UQ',3),
+      new Product('Speedex Stainless Steel Water Bottle', 199, 'https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcRqcpAgedQ6UFkSL4AnoRIZt8pwiech8ZYRbxlymYJP2qi6wPKceeUxEaUWn-91QeT8aY8KhGs8O-NUyL9zhxNd_rI05tbgsFa7i-BjdJBkpuY-eDJ13j8y',4),
+      
+    ];
+
+    const cart = new Cart();
+
+
+    const list = document.getElementById('product-list');
+    Products.forEach(product => {
+      const card = document.createElement('div');
+      card.classList.add('product');
+
+      card.innerHTML = `
+        <img src="${product.image}">
+        <div class="product-name">${product.name}</div>
+        <div class="product-price">₹${product.price}</div><br>
+        <button onclick="addToCart(${product.id})">Add to Cart</button>
+      `;
+
+      list.appendChild(card);
+    });
+
+
+    function addToCart(productId) {
+      const product = Products.find(x => x.id === productId);
+      if (product) {
+        cart.addItem(product);
+      }
+    }
+
+    function clearCart(){
+      cart.items=[];
+      cart.update();
+    }
+  </script>
+</body>
+</html>
