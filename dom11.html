@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+    *{
+        text-align: center;
+    }
+    body {
+      padding: 25px;
+      background-color: black;
+      color: white;
+      font-size: 25px;
+    }
+    
+    .dark-mode {
+      background-color: white;
+      color: black;
+    }
+
+    a{
+        text-decoration: none;
+    }
+    </style>
+
+</head>
+
+<body>
+    
+    <h2>Dark/Light Mode</h2>
+    
+    <button onclick="mode()" id="dmode">Change Theme</button><br><br>
+
+    <input id="time" placeholder="Enter time in seconds">
+    <button id="start" onclick="start()">Start</button>
+    <button id="pause" onclick="pause()">Pause</button>
+    <button id="reset" onclick="reset()">Reset</button><br>
+
+    <h1 id="display">00:00</h1><br><br>
+
+    <button><a href="glry.html">Image Gallery</a></button>
+
+    
+    <script>
+    function mode() {
+       var element = document.body;
+       element.classList.toggle("dark-mode");
+    }
+
+    let time;
+    let timeLeft = 0;
+    let paused = false;
+
+    function start(){
+        timeLeft = parseInt(document.getElementById('time').value);
+
+
+        time = setInterval(() => {
+            if (timeLeft <= 0) {
+                clearInterval(time);
+            } else {
+                timeLeft--;
+                update();
+                background();
+            }
+        }, 1000);
+    }
+
+    function pause(){   
+        clearInterval(time);
+        paused = true;
+    }
+
+    function reset(){
+        clearInterval(time);
+        timeLeft = 0;
+        update();
+        document.body.style.backgroundColor = "black";
+    }
+
+    function update() {
+        let minutes = Math.floor(timeLeft / 60);
+        let seconds = timeLeft % 60;
+        document.getElementById('display').textContent = `${minutes < 10 ? '0' + minutes : minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+    }
+
+    function background() {
+        if (timeLeft > 10) {
+            document.body.style.backgroundColor = "green";
+        } else if (timeLeft <= 10 && timeLeft > 5) {
+            document.body.style.backgroundColor = "yellow";
+        } else{
+            document.body.style.backgroundColor = "red";
+        }
+    }
+    </script>
+    
+</body>
+</html>
