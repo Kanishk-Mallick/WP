@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visa Requirement</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to right, #74ebd5, #acb6e5);
+        }
+
+        h2{
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 8px;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+        button {
+            background: #74ebd5;
+            color: black;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 4px;
+            width: 100%;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #acb6e5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Visa Requirement</h2>
+        <form id="visaForm">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required />
+            
+            <label for="contact">Passport Number</label>
+            <input type="text" id="contact" name="contact" required />
+            
+            <label for="country">Choose your country:</label>
+            <select name="country" id="country">
+                <option value="">--Please choose an option--</option>
+                <option value="India">India</option>
+                <option value="USA">United States</option>
+                <option value="UK">UK</option>
+                <option value="Australia">Australia</option>
+                <option value="Canada">Canada</option>
+            </select><br><br>
+
+            <button type="submit">Check VISA Requirement</button>
+        </form>
+        <p id="result"></p>
+    </div>
+
+    <script>
+    document.getElementById("visaForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+        
+        const name = document.getElementById("name").value;
+        const contact = document.getElementById("contact").value;
+        const country = document.getElementById("country").value;
+        let message = "";
+
+        if (!name || !contact || country === "") {
+            alert("All fields are required.");
+            return;
+        }
+
+        if (!/^[A-Za-z]\d{7,9}$/.test(contact)) {
+            alert("Enter a valid passport number (1 letter followed by 7-9 digits). ");
+            return;
+        }
+
+        switch (country) {
+            case "USA":
+                message = "Visa required for most applicants.";
+                break;
+            case "UK":
+                message = "Visa depends on the duration of stay.";
+                break;
+            case "India":
+                message = "Visa required before travel.";
+                break;
+            case "Australia":
+                message = "eVisa available for eligible travelers.";
+                break;
+            case "Canada":
+                message = "Visa required unless you have an eTA.";
+                break;
+            default:
+                message = "Please select a country.";
+        }
+
+        document.getElementById("result").textContent = message;
+    });
+    </script>
+</body>
+</html>
