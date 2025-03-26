@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+		content="width=device-width, 
+				initial-scale=1.0">
+	<title>Alarm Clock</title>
+</head>
+
+<style>
+body {
+	font-family: Arial, sans-serif;
+	background: linear-gradient(to right, #f83737, #ffe928);
+	color: #fff;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	margin: 0;
+}
+
+.clock {
+	text-align: center;
+	background-color: #fff;
+	border-radius: 10px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+	padding: 20px;
+	width: 300px;
+}
+
+.time {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+	font-size: 2rem;
+	margin: 20px 0;
+	color: #333;
+}
+
+.input-row {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	align-items: center;
+}
+
+.input-field {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+input[type="date"],
+input[type="time"] {
+	padding: 10px;
+	font-size: 1rem;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	width: 100%;
+	max-width: 200px;
+}
+
+.button-row {
+	display: flex;
+	gap: 10px;
+	justify-content: center;
+	align-items: center;
+}
+
+#setAlarm,
+#updateTime {
+	background-color: #fc3333;
+	color: #fff;
+	border: none;
+	padding: 10px 20px;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 1rem;
+	transition: background-color 0.3s;
+}
+
+#setAlarm:hover,
+#updateTime:hover {
+	background-color: #0056b3;
+}
+
+.alarms {
+	margin-top: 20px;
+	text-align: left;
+	color: #333;
+}
+
+.alarm {
+	background-color: #f0f0f0;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	padding: 10px;
+	margin: 10px 0;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	animation: fadeIn 0.5s ease-in-out;
+	font-size: 14px;
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
+	}
+}
+
+
+</style>
+
+<body>
+	<div class="clock">
+		
+		<div class="time" id="time">
+			00:00:00
+		</div>
+		<div class="input-row">
+			<div class="input-field">
+				<input type="date" id="alarmDate" class="alarm-input" min=""><br>
+			</div>
+			<div class="input-field">
+				<input type="time" id="alarmTime" class="alarm-input"><br>
+			</div>
+			<button id="setAlarm">Set Alarm</button>
+		</div>
+		<div class="alarms" id="alarms">
+		</div>
+	</div>
+<script>
+
+let time = document.getElementById("time");
+let dateInput = document.getElementById("alarmDate");
+let tInput = document.getElementById("alarmTime");
+let btn = document.getElementById("setAlarm");
+let contan = document.getElementById("alarms");
+let interVal;
+let alrms = [];
+
+function timeChangeFunction() {
+	let curr = new Date();
+	let hrs = curr.getHours();
+	let min = String(curr.getMinutes()).padStart(2, "0");
+	let sec = String(curr.getSeconds()).padStart(2, "0");
+	let period = "AM";
+	if (hrs >= 12) {
+		period = "PM";
+		if (hrs > 12) {
+			hrs -= 12;
+		}
+	}
+	hrs = String(hrs).padStart(2, "0");
+	time.textContent = `${hrs}:${min}:${sec} ${period}`;
+}
+function alarmSetFunction() {
+	let now = new Date();
+	let selectedDate = new Date(dateInput.value + "T" + tInput.value);
+	if (selectedDate <= now) {
+		alert(`Invalid time. Please select a future date and time.`);
+		return;
+	}
+    let timeUntilAlarm = selectedDate - now;
+	let alarmDiv = document.createElement("div");
+		alarmDiv.classList.add("alarm");
+
+		alarmDiv.innerHTML = `<span>${selectedDate.toLocaleString()}</span>
+		<button class="delete-alarm">Delete</button>`;
+
+		alarmDiv.querySelector(".delete-alarm")
+		alarmDiv.addEventListener("click", () => {
+				alarmDiv.remove();
+				clearTimeout(interVal);
+				let i = alrms.indexOf(selectedDate.toString());
+				if (i !== -1) {
+					alrms.splice(i, 1);
+				}
+			});
+		interVal = setTimeout(() => {
+			alert("Time to wake up!");
+			alarmDiv.remove();
+			const alarmIndex = alrms.indexOf(selectedDate.toString());
+			if (alarmIndex !== -1) {
+				alrms.splice(alarmIndex, 1);
+			}
+		}, timeUntilAlarm);
+		contan.appendChild(alarmDiv);
+		alrms.push(selectedDate.toString());
+	
+}
+function showAlarmFunction() {
+	let alarms = contan.querySelectorAll(".alarm");
+	alarms.forEach((alarm) => {
+		let deleteButton = alarm.querySelector(".delete-alarm");
+		deleteButton.addEventListener("click", () => {
+			alarmDiv.remove();
+			clearTimeout(interVal);
+			const alarmIndex = alrms.indexOf(selectedDate.toString());
+			if (alarmIndex !== -1) {
+				alrms.splice(alarmIndex, 1);
+			}
+		});
+	});
+}
+showAlarmFunction();
+setInterval(timeChangeFunction, 1000);
+btn.addEventListener("click", alarmSetFunction);
+timeChangeFunction();
+
+
+    </script>
+</body>
+
+</html>
